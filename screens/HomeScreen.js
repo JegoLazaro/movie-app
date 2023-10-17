@@ -1,11 +1,12 @@
-import { View, Text, Platform, TouchableOpacity } from "react-native";
-import React from "react";
+import { View, Text, Platform, TouchableOpacity, ScrollView } from "react-native";
+import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import {
   Bars3CenterLeftIcon,
   MagnifyingGlassIcon,
 } from "react-native-heroicons/outline";
+import { styles } from "../theme";
 
 function HomeScreen() {
   return (
@@ -17,7 +18,11 @@ function HomeScreen() {
           <TouchableOpacity>
             <Bars3CenterLeftIcon size={30} strokeWidth={2} color="white" />
           </TouchableOpacity>
-          <Text className="text-white text-3xl font-bold">Movies</Text>
+          <Text className="text-white text-3xl font-bold">
+            <Text style={styles.text}>M</Text>o
+            <Text style={styles.text}>v</Text>ie
+            <Text style={styles.text}>s</Text>
+          </Text>
           <TouchableOpacity>
             <MagnifyingGlassIcon size={30} strokeWidth={2} color="white" />
           </TouchableOpacity>
