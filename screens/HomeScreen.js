@@ -6,9 +6,16 @@ import {
   Bars3CenterLeftIcon,
   MagnifyingGlassIcon,
 } from "react-native-heroicons/outline";
+
+import TrendingMovies from "../components/trendingMovies";
 import { styles } from "../theme";
+import MovieList from "../components/movieList";
 
 function HomeScreen() {
+  const [trending, setTrending] = useState([1,2,3]);
+  const [upcoming, setUpcoming] = useState([1,2,3]);
+  const [topRated, setTopRated] = useState([1,2,3])
+
   return (
     <View className="flex-1 bg-neutral-800">
       {/* search bar & logo */}
@@ -28,6 +35,18 @@ function HomeScreen() {
           </TouchableOpacity>
         </View>
       </SafeAreaView>
+
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 10}}>
+        {/* trending movies */}
+        <TrendingMovies data={trending} />
+
+        {/* upcoming movies */}
+        <MovieList title="Upcoming" data={upcoming}/>
+
+        {/* top rated movies */}
+        <MovieList title="Top Rated" data={topRated}/>
+
+      </ScrollView>
     </View>
   );
 }
