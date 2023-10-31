@@ -1,5 +1,6 @@
 import { View, Text, Platform, TouchableOpacity, ScrollView } from "react-native";
 import React, { useState } from "react";
+import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import {
@@ -10,11 +11,18 @@ import {
 import TrendingMovies from "../components/trendingMovies";
 import { styles } from "../theme";
 import MovieList from "../components/movieList";
+import SearchScreen from "./SearchScreen";
 
 function HomeScreen() {
   const [trending, setTrending] = useState([1,2,3]);
   const [upcoming, setUpcoming] = useState([1,2,3]);
-  const [topRated, setTopRated] = useState([1,2,3])
+  const [topRated, setTopRated] = useState([1,2,3]);
+
+  const navigation = useNavigation();
+  const handleClick = () => {
+    navigation.navigate('Search');
+  }
+
 
   return (
     <View className="flex-1 bg-neutral-800">
@@ -30,7 +38,7 @@ function HomeScreen() {
             <Text style={styles.text}>v</Text>ie
             <Text style={styles.text}>s</Text>
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => handleClick()}>
             <MagnifyingGlassIcon size={30} strokeWidth={2} color="white" />
           </TouchableOpacity>
         </View>
