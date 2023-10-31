@@ -17,6 +17,7 @@ const topMargin = Platform.OS == "ios"? '' : 'mt-3';
 
 export default function MovieScreen() {
     let movieName = "Spider-Man: Across the Spider-Verse";
+    
     const navigation = useNavigation();
     const [isFave,toggleFave] = useState(false);
     const {params: item} = useRoute();
