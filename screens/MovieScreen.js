@@ -9,6 +9,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { styles, theme } from '../theme';
 import Cast from '../components/cast';
 import MovieList from '../components/movieList';
+import Loading from '../components/loading';
 
 
 var { width, height } = Dimensions.get('window');
@@ -23,6 +24,7 @@ export default function MovieScreen() {
     const {params: item} = useRoute();
     const [cast, setCast] = useState([1,2,3,4,5]);
     const [similarMovies, setSimilarMovies] = useState([1,2,3,4,5]);
+    const [loading, setLoading] = useState(false);
 
 
     useEffect(() => {
@@ -42,7 +44,11 @@ export default function MovieScreen() {
     contentContainerStyle={{paddingBottom: 20}}
     className="flex-1 bg-neutral-900"
     >
-        {/* back button and movie poster */}
+        {
+                loading ? (
+                    <Loading /> 
+                ) : (
+                    <View>
         <View className="w-full">
             <SafeAreaView className={"absolute z-20 w-full flex-row justify-between items-center px-4" + topMargin}>
                 <TouchableOpacity style={styles.background} className="rounded-xl p-1" onPress={() => navigation.goBack()}>
@@ -97,7 +103,11 @@ export default function MovieScreen() {
         <Cast cast={cast} navigation={navigation}/>
         {/* similar movies */}
         <MovieList title="Similar Movies" hideSeeAll={true} data={similarMovies}/> 
-
+        </View>
+                )
+            }
+        {/* back button and movie poster */}
+        
     </ScrollView>
   )
 }

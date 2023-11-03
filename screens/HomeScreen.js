@@ -1,6 +1,12 @@
-import { View, Text, Platform, TouchableOpacity, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Platform,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import React, { useState } from "react";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import {
@@ -12,17 +18,18 @@ import TrendingMovies from "../components/trendingMovies";
 import { styles } from "../theme";
 import MovieList from "../components/movieList";
 import SearchScreen from "./SearchScreen";
+import Loading from "../components/loading";
 
 function HomeScreen() {
-  const [trending, setTrending] = useState([1,2,3]);
-  const [upcoming, setUpcoming] = useState([1,2,3]);
-  const [topRated, setTopRated] = useState([1,2,3]);
+  const [trending, setTrending] = useState([1, 2, 3]);
+  const [upcoming, setUpcoming] = useState([1, 2, 3]);
+  const [topRated, setTopRated] = useState([1, 2, 3]);
+  const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation();
   const handleClick = () => {
-    navigation.navigate('Search');
-  }
-
+    navigation.navigate("Search");
+  };
 
   return (
     <View className="flex-1 bg-neutral-800">
@@ -44,17 +51,23 @@ function HomeScreen() {
         </View>
       </SafeAreaView>
 
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 10}}>
-        {/* trending movies */}
-        <TrendingMovies data={trending} />
+      {loading ? (
+        <Loading />
+      ) : (
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 10 }}
+        >
+          {/* trending movies */}
+          <TrendingMovies data={trending} />
 
-        {/* upcoming movies */}
-        <MovieList title="Upcoming" data={upcoming}/>
+          {/* upcoming movies */}
+          <MovieList title="Upcoming" data={upcoming} />
 
-        {/* top rated movies */}
-        <MovieList title="Top Rated" data={topRated}/>
-
-      </ScrollView>
+          {/* top rated movies */}
+          <MovieList title="Top Rated" data={topRated} />
+        </ScrollView>
+      )}
     </View>
   );
 }

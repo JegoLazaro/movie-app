@@ -14,6 +14,7 @@ import { HeartIcon as HeartOut } from "react-native-heroicons/outline";
 import { styles, theme } from "../theme";
 import { useNavigation } from "@react-navigation/native";
 import MovieList from "../components/movieList";
+import Loading from "../components/loading";
 
 var { width, height } = Dimensions.get("window");
 
@@ -21,7 +22,9 @@ export default function PersonScreen() {
   const navigation = useNavigation();
   const [isFave, toggleFave] = useState(false);
   const verticalMargin = Platform.OS == "ios" ? "" : "my-3";
-  const [personMovies, setPersonMovies] = useState([1,2,3,4,5])
+  const [personMovies, setPersonMovies] = useState([1,2,3,4,5]);
+  const [loading, setLoading] = useState(true);
+
 
   const HeartOutline = () => {
     return <HeartOut size={35} color={theme.background} fill={"white"} />;
@@ -53,8 +56,11 @@ export default function PersonScreen() {
           )}
         </TouchableOpacity>
       </SafeAreaView>
-      {/* person deets */}
-      <View>
+      {
+        loading ? (
+            <Loading />
+        ) : (
+            <View>
         <View
           className="flex-row justify-center"
           style={{
@@ -106,6 +112,10 @@ export default function PersonScreen() {
         {/* movieList */}
         <MovieList title={"Movies"} hideSeeAll={true} data={personMovies}/>
       </View>
+        )
+      }
+      {/* person deets */}
+      
     </ScrollView>
   );
 }
