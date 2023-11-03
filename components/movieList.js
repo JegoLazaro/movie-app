@@ -11,6 +11,7 @@ import {
 import React from "react";
 import { styles } from "../theme";
 import { useNavigation } from "@react-navigation/native";
+import { image342, noPicPoster } from "../api/moviedb";
 
 var { width, height } = Dimensions.get("window");
 
@@ -40,6 +41,7 @@ export default function MovieList({ title, data, hideSeeAll }) {
         contentContainerStyle={{ paddingHorizontal: 15 }}
       >
         {data.map((item, index) => {
+          //console.log('movieList item.name: ', item.original_title);
           return (
             <TouchableWithoutFeedback
               key={index}
@@ -47,7 +49,8 @@ export default function MovieList({ title, data, hideSeeAll }) {
             >
               <View className="space-y-1 mr-4">
                 <Image
-                  source={require("../assets/mp_2.jpeg")}
+                  //source={require("../assets/mp_2.jpeg")}
+                  source={{uri: image342(item.poster_path) || noPicPoster}}
                   className="rounded-3xl"
                   style={{
                     width: width * 0.33,
@@ -57,9 +60,9 @@ export default function MovieList({ title, data, hideSeeAll }) {
                 />
 
                 <Text className="text-neutral-300 ml-1 text-center">
-                  {movieName.length > 18
-                    ? movieName.slice(0, 14) + "..."
-                    : movieName}
+                  {item.title.length > 18
+                    ? item.title.slice(0, 14) + "..."
+                    : item.title}
                 </Text>
               </View>
             </TouchableWithoutFeedback>
