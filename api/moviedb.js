@@ -1,9 +1,9 @@
 import axios from "axios";
-import { apiKey } from "../constants";
+import { apiKey, apiBaseUrl } from "../constants";
 
 // endpoints
 
-const apiBaseUrl =  'https://api.themoviedb.org/3';
+
 const trendingMoviesEP = `${apiBaseUrl}/trending/movie/day?api_key=${apiKey}`;
 const upcomingMoviesEP = `${apiBaseUrl}/movie/upcoming?api_key=${apiKey}`;
 const topRatedMoviesEP = `${apiBaseUrl}/movie/top_rated?api_key=${apiKey}`;
@@ -25,7 +25,7 @@ export const noPicActor = 'https://upload.wikimedia.org/wikipedia/commons/9/99/S
 
 
 
-const apiCall = async (endpoint, params) => {
+export const apiCall = async (endpoint, params) => {
     const options = {
         method: 'GET',
         url: endpoint,

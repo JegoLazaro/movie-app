@@ -19,18 +19,21 @@ import { styles } from "../theme";
 import MovieList from "../components/movieList";
 import SearchScreen from "./SearchScreen";
 import Loading from "../components/loading";
+import NavbarLogo from "../components/navbarLogo";
 import {
   fetchTopRatedMovies,
   fetchTrendingMovies,
   fetchUpcomingMovies,
 } from "../api/moviedb";
-import NavbarLogo from "../components/navbarLogo";
+
 
 function HomeScreen() {
   const [upcoming, setUpcoming] = useState([]);
   const [topRated, setTopRated] = useState([]);
   const [trending, setTrending] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const [tvTrending ,setTvTrending] = useState([]);
 
   const navigation = useNavigation();
   const handleClick = () => {
@@ -88,6 +91,7 @@ function HomeScreen() {
           {upcoming.length > 0 && (
             <MovieList title="Upcoming" data={upcoming} />
           )}
+          <MovieList title="Trending TV Shows" data={tvTrending}/>
         </ScrollView>
       )}
     </View>

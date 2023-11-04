@@ -16,7 +16,7 @@ import { image342, noPicPoster } from "../api/moviedb";
 var { width, height } = Dimensions.get("window");
 
 export default function MovieList({ title, data, hideSeeAll }) {
-  let movieName = "Avengers: Endgame";
+  // let movieName = "Avengers: Endgame";
   const navigation = useNavigation();
 
   return (
