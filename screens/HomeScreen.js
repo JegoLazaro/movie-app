@@ -19,7 +19,11 @@ import { styles } from "../theme";
 import MovieList from "../components/movieList";
 import SearchScreen from "./SearchScreen";
 import Loading from "../components/loading";
-import { fetchTopRatedMovies, fetchTrendingMovies, fetchUpcomingMovies } from "../api/moviedb";
+import {
+  fetchTopRatedMovies,
+  fetchTrendingMovies,
+  fetchUpcomingMovies,
+} from "../api/moviedb";
 
 function HomeScreen() {
   const [upcoming, setUpcoming] = useState([]);
@@ -35,29 +39,29 @@ function HomeScreen() {
   const getTrendingMovies = async () => {
     const data = await fetchTrendingMovies();
     //console.log('Trending Movies: ', data);
-    data && data.results ? setTrending(data.results):'';
+    data && data.results ? setTrending(data.results) : "";
     setLoading(false);
-  }
+  };
 
   const getUpcomingMovies = async () => {
     const data = await fetchUpcomingMovies();
     //console.log('Upcoming Movies: ', data);
-    data && data.results ? setUpcoming(data.results):'';
+    data && data.results ? setUpcoming(data.results) : "";
     //setLoading(false);
-  }
+  };
 
   const getTopRatedMovies = async () => {
     const data = await fetchTopRatedMovies();
     //console.log('Top Rated Movies: ', data);
-    data && data.results ? setTopRated(data.results):'';
+    data && data.results ? setTopRated(data.results) : "";
     //setLoading(false);
-  }
+  };
 
   useEffect(() => {
     getTrendingMovies();
     getUpcomingMovies();
     getTopRatedMovies();
-  }, [])
+  }, []);
 
   return (
     <View className="flex-1 bg-neutral-800">
@@ -69,9 +73,9 @@ function HomeScreen() {
             <Bars3CenterLeftIcon size={30} strokeWidth={2} color="white" />
           </TouchableOpacity>
           <Text className="text-white text-3xl font-bold">
-            <Text style={styles.text}>M</Text>o
-            <Text style={styles.text}>v</Text>ie
-            <Text style={styles.text}>s</Text>
+            <Text style={styles.text}>L</Text>a
+            <Text style={styles.text}>z</Text>a
+            <Text style={styles.text}>ro</Text>
           </Text>
           <TouchableOpacity onPress={() => handleClick()}>
             <MagnifyingGlassIcon size={30} strokeWidth={2} color="white" />
@@ -87,14 +91,17 @@ function HomeScreen() {
           contentContainerStyle={{ paddingBottom: 10 }}
         >
           {/* trending movies */}
-          { trending.length > 0 && <TrendingMovies data={trending} /> }
+          {trending.length > 0 && <TrendingMovies data={trending} />}
 
           {/* top rated movies */}
-          { topRated.length > 0 && <MovieList title="Top Rated" data={topRated} /> }
+          {topRated.length > 0 && (
+            <MovieList title="Top Rated" data={topRated} />
+          )}
 
           {/* upcoming movies */}
-          { upcoming.length > 0 && <MovieList title="Upcoming" data={upcoming} /> }
-
+          {upcoming.length > 0 && (
+            <MovieList title="Upcoming" data={upcoming} />
+          )}
         </ScrollView>
       )}
     </View>

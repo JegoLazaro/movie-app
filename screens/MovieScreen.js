@@ -13,6 +13,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ChevronLeftIcon, HeartIcon } from "react-native-heroicons/solid";
 import { HeartIcon as HeartOut } from "react-native-heroicons/outline";
 import { LinearGradient } from "expo-linear-gradient";
+import { StatusBar } from "expo-status-bar";
+import {
+  Bars3CenterLeftIcon,
+  MagnifyingGlassIcon,
+} from "react-native-heroicons/outline";
 
 import { styles, theme } from "../theme";
 import Cast from "../components/cast";
@@ -25,6 +30,7 @@ import {
   image185,
   image342,
   image500,
+  noPicPoster,
 } from "../api/moviedb";
 
 var { width, height } = Dimensions.get("window");
@@ -43,7 +49,7 @@ export default function MovieScreen() {
 
   const getMovieDeets = async (id) => {
     const data = await fetchMovieDeets(id);
-    //console.log("DEETS =>>: ", data);
+    console.log("DEETS =>>: ", data);
     if (data) setMovie(data);
     setLoading(false);
   };
@@ -75,14 +81,30 @@ export default function MovieScreen() {
   };
 
   return (
-    <ScrollView
+    <View
       contentContainerStyle={{ paddingBottom: 20 }}
       className="flex-1 bg-neutral-900"
     >
+      <SafeAreaView className={Platform.OS === "ios" ? "-mb-2" : "mb-3"}>
+        <StatusBar style="light" />
+        <View className="flex-row justify-between items-center mx-4">
+          <TouchableOpacity>
+            <Bars3CenterLeftIcon size={30} strokeWidth={2} color="white" />
+          </TouchableOpacity>
+          <Text className="text-white text-3xl font-bold">
+            <Text style={styles.text}>L</Text>a
+            <Text style={styles.text}>z</Text>a
+            <Text style={styles.text}>ro</Text>
+          </Text>
+          <TouchableOpacity onPress={() => handleClick()}>
+            <MagnifyingGlassIcon size={30} strokeWidth={2} color="white" />
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
       {loading ? (
         <Loading />
       ) : (
-        <View>
+        <ScrollView>
           <View className="w-full">
             <SafeAreaView
               className={
@@ -109,8 +131,8 @@ export default function MovieScreen() {
             <View className="">
               <Image
                 //source={require("../assets/mp_1.jpg")}
-                source={{ uri: image500(item.poster_path) }}
-                style={{ width: width, height: height * 0.55 }}
+                source={{ uri: image500(item.poster_path) || noPicPoster }}
+                style={{ width: width, height: height * 0.75 }}
               />
               <LinearGradient
                 colors={[
@@ -144,17 +166,14 @@ export default function MovieScreen() {
               {movie.genres.map((genre, index) => {
                 let showDot = index + 1 != movie.genres.length;
                 return (
-                  <Text key={index} className="text-neutral-400 font-semibold text-base text-center">
-                   {genre?.name} {showDot? "•" : null}
+                  <Text
+                    key={index}
+                    className="text-neutral-400 font-semibold text-base text-center"
+                  >
+                    {genre?.name} {showDot ? "•" : null}
                   </Text>
                 );
               })}
-              {/* <Text className="text-neutral-400 font-semibold text-base text-center">
-                Thrill •
-              </Text>
-              <Text className="text-neutral-400 font-semibold text-base text-center">
-                Comedy
-              </Text> */}
             </View>
             {/* desc */}
             <Text className="text-neutral-400 mx-4 tracking-wide text-justify">
@@ -169,9 +188,9 @@ export default function MovieScreen() {
             hideSeeAll={true}
             data={similarMovies}
           />
-        </View>
+        </ScrollView>
       )}
       {/* back button and movie poster */}
-    </ScrollView>
+    </View>
   );
 }

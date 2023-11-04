@@ -23,15 +23,13 @@ export default function MovieList({ title, data, hideSeeAll }) {
     <View className="mb-8 space-y-4">
       <View className="mx-4 flex-row justify-between items-center">
         <Text className="text-white text-xl">{title}</Text>
-        {
-        !hideSeeAll && (
+        {!hideSeeAll && (
           <TouchableOpacity>
             <Text style={styles.text} className="text-lg">
               See All
             </Text>
           </TouchableOpacity>
-        ) 
-        }
+        )}
       </View>
 
       {/* movies row */}
@@ -50,7 +48,7 @@ export default function MovieList({ title, data, hideSeeAll }) {
               <View className="space-y-1 mr-4">
                 <Image
                   //source={require("../assets/mp_2.jpeg")}
-                  source={{uri: image342(item.poster_path) || noPicPoster}}
+                  source={{ uri: image342(item.poster_path) || noPicPoster }}
                   className="rounded-3xl"
                   style={{
                     width: width * 0.33,
