@@ -32,6 +32,7 @@ import {
   image500,
   noPicPoster,
 } from "../api/moviedb";
+import NavbarLogo from "../components/navbarLogo";
 
 var { width, height } = Dimensions.get("window");
 const topMargin = Platform.OS == "ios" ? "" : "mt-3";
@@ -49,7 +50,7 @@ export default function MovieScreen() {
 
   const getMovieDeets = async (id) => {
     const data = await fetchMovieDeets(id);
-    console.log("DEETS =>>: ", data);
+    //console.log("DEETS =>>: ", data);
     if (data) setMovie(data);
     setLoading(false);
   };
@@ -85,22 +86,7 @@ export default function MovieScreen() {
       contentContainerStyle={{ paddingBottom: 20 }}
       className="flex-1 bg-neutral-900"
     >
-      <SafeAreaView className={Platform.OS === "ios" ? "-mb-2" : "mb-3"}>
-        <StatusBar style="light" />
-        <View className="flex-row justify-between items-center mx-4">
-          <TouchableOpacity>
-            <Bars3CenterLeftIcon size={30} strokeWidth={2} color="white" />
-          </TouchableOpacity>
-          <Text className="text-white text-3xl font-bold">
-            <Text style={styles.text}>L</Text>a
-            <Text style={styles.text}>z</Text>a
-            <Text style={styles.text}>ro</Text>
-          </Text>
-          <TouchableOpacity onPress={() => handleClick()}>
-            <MagnifyingGlassIcon size={30} strokeWidth={2} color="white" />
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>
+      <NavbarLogo />
       {loading ? (
         <Loading />
       ) : (

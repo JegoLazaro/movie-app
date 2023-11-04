@@ -24,6 +24,7 @@ import {
   fetchTrendingMovies,
   fetchUpcomingMovies,
 } from "../api/moviedb";
+import NavbarLogo from "../components/navbarLogo";
 
 function HomeScreen() {
   const [upcoming, setUpcoming] = useState([]);
@@ -66,22 +67,7 @@ function HomeScreen() {
   return (
     <View className="flex-1 bg-neutral-800">
       {/* search bar & logo */}
-      <SafeAreaView className={Platform.OS === "ios" ? "-mb-2" : "mb-3"}>
-        <StatusBar style="light" />
-        <View className="flex-row justify-between items-center mx-4">
-          <TouchableOpacity>
-            <Bars3CenterLeftIcon size={30} strokeWidth={2} color="white" />
-          </TouchableOpacity>
-          <Text className="text-white text-3xl font-bold">
-            <Text style={styles.text}>L</Text>a
-            <Text style={styles.text}>z</Text>a
-            <Text style={styles.text}>ro</Text>
-          </Text>
-          <TouchableOpacity onPress={() => handleClick()}>
-            <MagnifyingGlassIcon size={30} strokeWidth={2} color="white" />
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>
+      <NavbarLogo />
 
       {loading ? (
         <Loading />
