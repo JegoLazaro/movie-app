@@ -25,6 +25,7 @@ import {
   fetchTrendingMovies,
   fetchUpcomingMovies,
 } from "../api/moviedb";
+import { fetchTvTrending } from "../api/tvdb";
 
 
 function HomeScreen() {
@@ -61,10 +62,18 @@ function HomeScreen() {
     //setLoading(false);
   };
 
+  const getTvTrending = async () => {
+    const data = await fetchTvTrending();
+    data && data.results ? setTvTrending(data.results) : "";
+    //setLoading(false);
+  }
+
   useEffect(() => {
     getTrendingMovies();
     getUpcomingMovies();
     getTopRatedMovies();
+
+    getTvTrending();
   }, []);
 
   return (
@@ -80,7 +89,7 @@ function HomeScreen() {
           contentContainerStyle={{ paddingBottom: 10 }}
         >
           {/* trending movies */}
-          {trending.length > 0 && <TrendingMovies data={trending} />}
+          {trending.length > 0 && <TrendingMovies title={"Trending Movies"} data={trending} />}
 
           {/* top rated movies */}
           {topRated.length > 0 && (
@@ -91,7 +100,7 @@ function HomeScreen() {
           {upcoming.length > 0 && (
             <MovieList title="Upcoming" data={upcoming} />
           )}
-          <MovieList title="Trending TV Shows" data={tvTrending}/>
+          {tvTrending.length > 0 && <TrendingMovies title={"Trending TV Shows"} data={tvTrending} /> }
         </ScrollView>
       )}
     </View>

@@ -12,7 +12,7 @@ import { image500 } from "../api/moviedb";
 
 var { width, height } = Dimensions.get("window");
 
-function TrendingMovies({ data }) {
+function TrendingMovies({ data, title }) {
   const navigation = useNavigation();
   const handleClick = (item) => {
     navigation.navigate("Movie", item);
@@ -20,7 +20,7 @@ function TrendingMovies({ data }) {
 
   return (
     <View className="mb-8">
-      <Text className="text-white text-xl mx-4 mb-5">Trending</Text>
+      <Text className="text-white text-xl mx-4 mb-5">{title}</Text>
       <Carousel
         data={data}
         renderItem={({ item }) => (
