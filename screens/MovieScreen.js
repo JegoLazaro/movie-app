@@ -2,24 +2,12 @@ import {
   View,
   Text,
   ScrollView,
-  TouchableOpacity,
   Dimensions,
-  Platform,
   Image,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { ChevronLeftIcon, HeartIcon } from "react-native-heroicons/solid";
-import { HeartIcon as HeartOut } from "react-native-heroicons/outline";
 import { LinearGradient } from "expo-linear-gradient";
-import { StatusBar } from "expo-status-bar";
-import {
-  Bars3CenterLeftIcon,
-  MagnifyingGlassIcon,
-} from "react-native-heroicons/outline";
-
-import { styles, theme } from "../theme";
 import Cast from "../components/cast";
 import MovieList from "../components/movieList";
 import Loading from "../components/loading";
@@ -27,21 +15,18 @@ import {
   fetchMovieCast,
   fetchMovieDeets,
   fetchSimilarMovies,
-  image185,
-  image342,
   image500,
   noPicPoster,
 } from "../api/moviedb";
 import NavbarLogo from "../components/navbarLogo";
+import FavGoback from "../components/favGoback";
 
 var { width, height } = Dimensions.get("window");
-const topMargin = Platform.OS == "ios" ? "" : "mt-3";
 
 export default function MovieScreen() {
   let movieName = "Spider-Man: Across the Spider-Verse";
 
   const navigation = useNavigation();
-  const [isFave, toggleFave] = useState(false);
   const { params: item } = useRoute();
   const [cast, setCast] = useState([]);
   const [similarMovies, setSimilarMovies] = useState([]);
@@ -77,9 +62,6 @@ export default function MovieScreen() {
     getSimilarMovies(item.id);
   }, [item]);
 
-  const HeartOutline = () => {
-    return <HeartOut size={35} color={theme.background} fill={"white"} />;
-  };
 
   return (
     <View
@@ -92,28 +74,7 @@ export default function MovieScreen() {
       ) : (
         <ScrollView>
           <View className="w-full">
-            <SafeAreaView
-              className={
-                "absolute z-20 w-full flex-row justify-between items-center px-4" +
-                topMargin
-              }
-            >
-              <TouchableOpacity
-                style={styles.background}
-                className="rounded-xl p-1"
-                onPress={() => navigation.goBack()}
-              >
-                <ChevronLeftIcon size="28" strokeWidth={2.5} color="white" />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => toggleFave(!isFave)}>
-                {/* <HeartIcon size={35} color={ isFave ? "red" : "white"}/> */}
-                {isFave ? (
-                  <HeartIcon size={35} color={theme.background} />
-                ) : (
-                  HeartOutline()
-                )}
-              </TouchableOpacity>
-            </SafeAreaView>
+            <FavGoback />
             <View className="">
               <Image
                 //source={require("../assets/mp_1.jpg")}

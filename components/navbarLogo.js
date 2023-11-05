@@ -4,8 +4,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { Bars3CenterLeftIcon, MagnifyingGlassIcon } from 'react-native-heroicons/outline';
 import { styles } from '../theme';
+import { useNavigation } from '@react-navigation/native';
 
 export default function NavbarLogo() {
+  const navigation = useNavigation();
+  const handleClick = () => {
+    navigation.navigate("Search");
+  };
   return (
     <SafeAreaView className={Platform.OS === "ios" ? "-mb-6" : "mb-3"}>
         <StatusBar style="light" />

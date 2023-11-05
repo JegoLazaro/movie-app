@@ -35,12 +35,6 @@ function HomeScreen() {
   const [loading, setLoading] = useState(true);
 
   const [tvTrending ,setTvTrending] = useState([]);
-
-  const navigation = useNavigation();
-  const handleClick = () => {
-    navigation.navigate("Search");
-  };
-
   const getTrendingMovies = async () => {
     const data = await fetchTrendingMovies();
     //console.log('Trending Movies: ', data);
