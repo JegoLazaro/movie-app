@@ -1,23 +1,14 @@
 import {
   View,
-  Text,
-  Platform,
   TouchableOpacity,
   ScrollView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { StatusBar } from "expo-status-bar";
-import {
-  Bars3CenterLeftIcon,
-  MagnifyingGlassIcon,
-} from "react-native-heroicons/outline";
 
 import TrendingMovies from "../components/trendingMovies";
 import { styles } from "../theme";
 import MovieList from "../components/movieList";
-import SearchScreen from "./SearchScreen";
 import Loading from "../components/loading";
 import NavbarLogo from "../components/navbarLogo";
 import {

@@ -24,7 +24,6 @@ import FavGoback from "../components/favGoback";
 var { width, height } = Dimensions.get("window");
 
 export default function MovieScreen() {
-  let movieName = "Spider-Man: Across the Spider-Verse";
 
   const navigation = useNavigation();
   const { params: item } = useRoute();
@@ -77,7 +76,6 @@ export default function MovieScreen() {
             <FavGoback />
             <View className="">
               <Image
-                //source={require("../assets/mp_1.jpg")}
                 source={{ uri: image500(item.poster_path) || noPicPoster }}
                 style={{ width: width, height: height * 0.75 }}
               />

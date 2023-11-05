@@ -11,6 +11,10 @@ export default function NavbarLogo() {
   const handleClick = () => {
     navigation.navigate("Search");
   };
+  const handleClickHome = () => {
+    navigation.navigate("Home");
+  };
+
   return (
     <SafeAreaView className={Platform.OS === "ios" ? "-mb-6" : "mb-3"}>
         <StatusBar style="light" />
@@ -18,11 +22,13 @@ export default function NavbarLogo() {
           <TouchableOpacity>
             <Bars3CenterLeftIcon size={30} strokeWidth={2} color="white" />
           </TouchableOpacity>
+          <TouchableOpacity onPress={() => handleClickHome()}>
           <Text className="text-white text-3xl font-bold">
             <Text style={styles.text}>L</Text>a
             <Text style={styles.text}>z</Text>a
             <Text style={styles.text}>ro</Text>
           </Text>
+          </TouchableOpacity>
           <TouchableOpacity onPress={() => handleClick()}>
             <MagnifyingGlassIcon size={30} strokeWidth={2} color="white" />
           </TouchableOpacity>

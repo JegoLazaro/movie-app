@@ -4,12 +4,13 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { ChevronLeftIcon, HeartIcon } from 'react-native-heroicons/outline'
 import { HeartIcon as HeartOut } from "react-native-heroicons/outline";
 import { styles,theme } from '../theme'
+import { useNavigation } from '@react-navigation/native';
 
 const topMargin = Platform.OS == "ios" ? "" : "mt-3";
 
 
 export default function FavGoback() {
-
+    const navigation = useNavigation();
     const [isFave, toggleFave] = useState(false);
     const HeartOutline = () => {
         return <HeartOut size={35} color={theme.background} fill={"white"} />;
