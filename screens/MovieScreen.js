@@ -26,38 +26,51 @@ var { width, height } = Dimensions.get("window");
 export default function MovieScreen() {
 
   const navigation = useNavigation();
-  const { params: item } = useRoute();
+  const { params: {item, media} } = useRoute();
   const [cast, setCast] = useState([]);
   const [similarMovies, setSimilarMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [movie, setMovie] = useState({});
 
+  console.log('MEDIA IS NOW: ', media)
+
   const getMovieDeets = async (id) => {
-    const data = await fetchMovieDeets(id);
-    //console.log("DEETS =>>: ", data);
-    if (data) setMovie(data);
-    setLoading(false);
+    try {
+        const data = await fetchMovieDeets(id, media);
+        if (data) setMovie(data);
+        setLoading(false);
+    } catch (e) {
+        console.log('Error fetching M Deets: ',e);
+    }
   };
   const getMovieCast = async (id) => {
-    const data = await fetchMovieCast(id);
-    //console.log("CAST =>>: ", data);
-    data && data.cast ? setCast(data.cast) : "";
+    try {
+        const data = await fetchMovieCast(id, media);
+        data && data.cast ? setCast(data.cast) : "";
+    } catch(e) {
+        console.log('Error fetching M Cast: ',e);
+    }
+    
     //setLoading(false);
   };
 
   const getSimilarMovies = async (id) => {
-    const data = await fetchSimilarMovies(id);
-    //console.log("CAST =>>: ", data);
-    data && data.results ? setSimilarMovies(data.results) : "";
+    try {
+        const data = await fetchSimilarMovies(id, media);
+        data && data.results ? setSimilarMovies(data.results) : "";
+    } catch(e) {
+        console.log('Error fetching Similar Movies: ', e)
+    }
+    
     //setLoading(false);
   };
 
   useEffect(() => {
-    //CALL API FOR MOVIE DEETS\
-
+    //CALL API FOR MOVIE 
     setLoading(true);
-    getMovieDeets(item.id);
-    getMovieCast(item.id);
+
+    getMovieDeets(item?.id);
+    getMovieCast(item?.id);
     getSimilarMovies(item.id);
   }, [item]);
 
@@ -76,7 +89,7 @@ export default function MovieScreen() {
             <FavGoback />
             <View className="">
               <Image
-                source={{ uri: image500(item.poster_path) || noPicPoster }}
+                source={{ uri: image500(item?.poster_path) || noPicPoster }}
                 style={{ width: width, height: height * 0.75 }}
               />
               <LinearGradient
@@ -96,15 +109,20 @@ export default function MovieScreen() {
 
           <View style={{ marginTop: -(height * 0.09) }} className="space-y-3">
             <Text className="text-white text-center text-3xl font-bold tracking-wider">
-              {movie?.title}
+              {
+                media === 'movie' ? movie?.title : movie?.name
+              }
             </Text>
             {movie?.id ? (
               <Text className="text-neutral-400 font-semibold text-base text-center">
-                {movie?.status} • {movie?.release_date.slice(0, 4)} • {""}
-                {movie?.runtime} mins
+                {movie?.status} • { media === 'movie'? 
+                    movie?.release_date.slice(0, 4) : movie?.first_air_date.slice(0, 4)
+                } • {""}
+                { media === 'movie'? 
+                    movie?.runtime + ' mins': 'E' + movie?.number_of_episodes +  ' S'+ movie?.number_of_seasons 
+                } 
               </Text>
             ) : null}
-            {/* deets */}
 
             {/* genres */}
             <View className="flex-row justify-center mx-4 space-x-2">
@@ -128,14 +146,9 @@ export default function MovieScreen() {
           {/* cast members */}
           {cast.length > 0 && <Cast cast={cast} navigation={navigation} />}
           {/* similar movies */}
-          <MovieList
-            title="Similar Movies"
-            hideSeeAll={true}
-            data={similarMovies}
-          />
+          <MovieList title="Similar Movies" hideSeeAll={true} data={similarMovies} media={media}/>
         </ScrollView>
       )}
-      {/* back button and movie poster */}
     </View>
   );
 }

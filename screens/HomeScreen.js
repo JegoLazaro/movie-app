@@ -28,21 +28,18 @@ function HomeScreen() {
   const [tvTrending ,setTvTrending] = useState([]);
   const getTrendingMovies = async () => {
     const data = await fetchTrendingMovies();
-    //console.log('Trending Movies: ', data);
     data && data.results ? setTrending(data.results) : "";
     setLoading(false);
   };
 
   const getUpcomingMovies = async () => {
     const data = await fetchUpcomingMovies();
-    //console.log('Upcoming Movies: ', data);
     data && data.results ? setUpcoming(data.results) : "";
     //setLoading(false);
   };
 
   const getTopRatedMovies = async () => {
     const data = await fetchTopRatedMovies();
-    //console.log('Top Rated Movies: ', data);
     data && data.results ? setTopRated(data.results) : "";
     //setLoading(false);
   };
@@ -74,18 +71,18 @@ function HomeScreen() {
           contentContainerStyle={{ paddingBottom: 10 }}
         >
           {/* trending movies */}
-          {trending.length > 0 && <TrendingMovies title={"Trending Movies"} data={trending} />}
+          {trending.length > 0 && <TrendingMovies title={"Trending Movies"} data={trending} media={'movie'}/>}
 
           {/* top rated movies */}
           {topRated.length > 0 && (
-            <MovieList title="Top Rated" data={topRated} />
+            <MovieList title="Top Rated" data={topRated} media={"movie"}/>
           )}
 
           {/* upcoming movies */}
           {upcoming.length > 0 && (
-            <MovieList title="Upcoming" data={upcoming} />
+            <MovieList title="Upcoming" data={upcoming} media={"movie"}/>
           )}
-          {tvTrending.length > 0 && <TrendingMovies title={"Trending TV Shows"} data={tvTrending} /> }
+          {tvTrending.length > 0 && <TrendingMovies title={"Trending TV Shows"} data={tvTrending} media={'tv'}/> }
         </ScrollView>
       )}
     </View>

@@ -15,9 +15,10 @@ import { image342, noPicPoster } from "../api/moviedb";
 
 var { width, height } = Dimensions.get("window");
 
-export default function MovieList({ title, data, hideSeeAll }) {
+export default function MovieList({ title, data, hideSeeAll, media }) {
   // let movieName = "Avengers: Endgame";
   const navigation = useNavigation();
+  console.log("MLIST MEDIA: ", media);
 
   return (
     <View className="mb-8 space-y-4">
@@ -58,9 +59,13 @@ export default function MovieList({ title, data, hideSeeAll }) {
                 />
 
                 <Text className="text-neutral-300 ml-1 text-center">
-                  {item.title.length > 18
-                    ? item.title.slice(0, 14) + "..."
-                    : item.title}
+                  { 
+                  media === 'movie' ? (
+                    item.title.length > 18 ? item.title.slice(0, 14) + "..." : item.title
+                  ) :  (
+                    item.name.length > 18 ? item.name.slice(0, 14) + "..." : item.name
+                  )
+                  }
                 </Text>
               </View>
             </TouchableWithoutFeedback>

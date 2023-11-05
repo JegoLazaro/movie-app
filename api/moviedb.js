@@ -9,9 +9,9 @@ const upcomingMoviesEP = `${apiBaseUrl}/movie/upcoming?api_key=${apiKey}`;
 const topRatedMoviesEP = `${apiBaseUrl}/movie/top_rated?api_key=${apiKey}`;
 
 // dynamic EPs
-const movieDeetsEP = id => `${apiBaseUrl}/movie/${id}?api_key=${apiKey}`;
-const movieCastEP = id => `${apiBaseUrl}/movie/${id}/credits?api_key=${apiKey}`;
-const similarMoviesEP = id => `${apiBaseUrl}/movie/${id}/similar?api_key=${apiKey}`;
+const movieDeetsEP = (id,media) => `${apiBaseUrl}/${media}/${id}?api_key=${apiKey}`;
+const movieCastEP = (id,media) => `${apiBaseUrl}/${media}/${id}/credits?api_key=${apiKey}`;
+const similarMoviesEP = (id,media) => `${apiBaseUrl}/${media}/${id}/similar?api_key=${apiKey}`;
 
 export const image500 = path => path ? `https://image.tmdb.org/t/p/w500/${path}` : null;
 
@@ -54,14 +54,14 @@ export const fetchTopRatedMovies = () => {
     return apiCall(topRatedMoviesEP);
 }
 
-export const fetchMovieDeets = id => {
-    return apiCall(movieDeetsEP(id));
+export const fetchMovieDeets = (id,media) => {
+    return apiCall(movieDeetsEP(id,media));
 }
 
-export const fetchMovieCast = id => {
-    return apiCall(movieCastEP(id));
+export const fetchMovieCast = (id,media) => {
+    return apiCall(movieCastEP(id,media));
 }
 
-export const fetchSimilarMovies = id => {
-    return apiCall(similarMoviesEP(id));
+export const fetchSimilarMovies = (id,media) => {
+    return apiCall(similarMoviesEP(id,media));
 }

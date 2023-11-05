@@ -12,11 +12,12 @@ import { image500 } from "../api/moviedb";
 
 var { width, height } = Dimensions.get("window");
 
-function TrendingMovies({ data, title }) {
+function TrendingMovies({ data, title, media }) {
   const navigation = useNavigation();
-  const handleClick = (item) => {
-    navigation.navigate("Movie", item);
+  const handleClick = (item, media) => {
+    navigation.navigate("Movie", { item, media });
   };
+  console.log('MEDIA TYPE =>> ', media)
 
   return (
     <View className="mb-8">
@@ -24,7 +25,7 @@ function TrendingMovies({ data, title }) {
       <Carousel
         data={data}
         renderItem={({ item }) => (
-          <MovieCard item={item} handleClick={handleClick} />
+          <MovieCard item={item} handleClick={() => handleClick(item, media)} media={media}/>
         )}
         firstItem={1}
         inactiveSlideOpacity={0.6}
@@ -36,12 +37,11 @@ function TrendingMovies({ data, title }) {
   );
 }
 
-const MovieCard = ({ item, handleClick }) => {
-  //console.log('item.poster_path: ', item.poster_path);
+const MovieCard = ({ item, handleClick, media }) => {
+  //console.log("MEDIA TYPE OF ITEM IS:", item.media_type)
   return (
-    <TouchableWithoutFeedback onPress={() => handleClick(item)}>
+    <TouchableWithoutFeedback onPress={() => handleClick(item, media)}>
       <Image
-        //source={require('../assets/mp_1.jpg')}
         source={{ uri: image500(item.poster_path) }}
         style={{
           width: width * 0.6,
@@ -50,6 +50,7 @@ const MovieCard = ({ item, handleClick }) => {
           objectFit: "contain",
         }}
       />
+      
     </TouchableWithoutFeedback>
   );
 };
