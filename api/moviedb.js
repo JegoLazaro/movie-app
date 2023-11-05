@@ -5,7 +5,7 @@ import { apiKey, apiBaseUrl } from "../constants";
 
 
 const trendingMoviesEP = `${apiBaseUrl}/trending/movie/day?api_key=${apiKey}`;
-const upcomingMoviesEP = `${apiBaseUrl}/movie/upcoming?api_key=${apiKey}`;
+const upcomingMoviesEP = `${apiBaseUrl}/movie/upcoming?api_key=${apiKey}`; 
 const topRatedMoviesEP = `${apiBaseUrl}/movie/top_rated?api_key=${apiKey}`;
 
 // dynamic EPs
@@ -34,7 +34,6 @@ export const apiCall = async (endpoint, params) => {
 
     try {
         const response = await axios.request(options);
-
         return response.data;
     } catch(e){
         console.log('ERROR: ', e);

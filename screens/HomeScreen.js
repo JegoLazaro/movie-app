@@ -33,15 +33,22 @@ function HomeScreen() {
   };
 
   const getUpcomingMovies = async () => {
-    const data = await fetchUpcomingMovies();
-    data && data.results ? setUpcoming(data.results) : "";
-    //setLoading(false);
+    try {
+      const data = await fetchUpcomingMovies();
+      data && data.results? setUpcoming(data.results) : "";
+      
+    }catch (e) {
+      console.log('Error in getting Upcoming Movies',e);
+    }
   };
 
   const getTopRatedMovies = async () => {
-    const data = await fetchTopRatedMovies();
-    data && data.results ? setTopRated(data.results) : "";
-    //setLoading(false);
+    try{
+      const data = await fetchTopRatedMovies();
+      data && data.results? setTopRated(data.results) : "";
+    }catch (e) {
+      console.log('Error in getting Top Rated Movies',e);
+    }
   };
 
   const getTvTrending = async () => {
