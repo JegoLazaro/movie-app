@@ -31,7 +31,7 @@ export default function PersonScreen() {
   };
   return (
     <ScrollView
-      className="flex-1 bg-neutral-900"
+      className="flex-1 bg-slate-800"
       contentContainerStyle={{ paddingBottom: 20 }}
     >
       <SafeAreaView

@@ -35,7 +35,7 @@ const SearchScreen = () => {
   return (
     <View
       contentContainerStyle={{ paddingBottom: 40 }}
-      className="flex-1 bg-neutral-800"
+      className="flex-1 bg-slate-800"
     >
       <View className="w-full ">
         <SafeAreaView className="absolute w-full flex-row justify-between items-center">

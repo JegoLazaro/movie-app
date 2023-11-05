@@ -66,7 +66,7 @@ function HomeScreen() {
   }, []);
 
   return (
-    <View className="flex-1 bg-neutral-800">
+    <View className="flex-1 bg-slate-800">
       {/* search bar & logo */}
       <NavbarLogo />
 

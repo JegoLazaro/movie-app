@@ -78,7 +78,7 @@ export default function MovieScreen() {
   return (
     <View
       contentContainerStyle={{ paddingBottom: 20 }}
-      className="flex-1 bg-neutral-900"
+      className="flex-1 bg-slate-800"
     >
       <NavbarLogo />
       {loading ? (
