@@ -1,13 +1,4 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  TouchableWithoutFeedback,
-  StyleSheet,
-  Image,
-  Dimensions,
-} from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, TouchableWithoutFeedback, StyleSheet, Image, Dimensions } from "react-native";
 import React from "react";
 import { styles } from "../theme";
 import { useNavigation } from "@react-navigation/native";
@@ -18,7 +9,7 @@ var { width, height } = Dimensions.get("window");
 export default function MovieList({ title, data, hideSeeAll, media }) {
   // let movieName = "Avengers: Endgame";
   const navigation = useNavigation();
-  console.log("MLIST MEDIA: ", media);
+  // console.log("MLIST MEDIA: ", media);
 
   return (
     <View className="mb-8 space-y-4">

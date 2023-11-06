@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  TouchableWithoutFeedback,
-  Image,
-  Dimensions,
-} from "react-native";
+import { View, Text, TouchableWithoutFeedback, Image, Dimensions } from "react-native";
 import React from "react";
 import Carousel from "react-native-snap-carousel";
 import { useNavigation } from "@react-navigation/native";
@@ -17,7 +11,6 @@ function TrendingMovies({ data, title, media }) {
   const handleClick = (item, media) => {
     navigation.navigate("Movie", { item, media });
   };
-  console.log('MEDIA TYPE =>> ', media)
 
   return (
     <View className="mb-8">

@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  Dimensions,
-  Image,
-} from "react-native";
+import { View, Text, ScrollView, Dimensions, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -31,8 +25,6 @@ export default function MovieScreen() {
   const [similarMovies, setSimilarMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [movie, setMovie] = useState({});
-
-  console.log('MEDIA IS NOW: ', media)
 
   const getMovieDeets = async (id) => {
     try {
@@ -95,8 +87,8 @@ export default function MovieScreen() {
               <LinearGradient
                 colors={[
                   "transparent",
-                  "rgba(23,23,23,.4)",
-                  "rgba(23,23,23,1)",
+                  "rgba(30,41,59,.4)",
+                  "rgba(30,41,59,1)",
                 ]}
                 style={{ width: width, height: height * 0.4 }}
                 start={{ x: 0.5, y: 0 }}
