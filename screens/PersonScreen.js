@@ -16,7 +16,7 @@ import { styles, theme } from "../theme";
 import { useNavigation } from "@react-navigation/native";
 import MovieList from "../components/movieList";
 import Loading from "../components/loading";
-import { fetchPerson, fetchPersonMovies, image500, noPicActor, noPicPoster } from "../api/moviedb";
+import { fetchPerson, fetchPersonMovies, fetchPersonTvShows, image500, noPicActor, noPicPoster } from "../api/moviedb";
 
 var { width, height } = Dimensions.get("window");
 
@@ -25,6 +25,7 @@ export default function PersonScreen() {
   const [isFave, toggleFave] = useState(false);
   const verticalMargin = Platform.OS == "ios" ? "" : "my-3";
   const [personMovies, setPersonMovies] = useState([]);
+  const [personTvShows, setPersonTvShows] = useState([]);
   const [loading, setLoading] = useState(false);
   const [person, setPerson] = useState({});
   const { params: item } = useRoute();
@@ -49,11 +50,21 @@ export default function PersonScreen() {
         console.log('Error fetching Person Movies: ', e)
     }
   };
+  const getPersonTvShows = async (id) => {
+    try {
+        const data = await fetchPersonTvShows(id);
+        data && data.cast ? setPersonTvShows(data.cast) : "";
+        //console.log('PERSON MOVIES =>>', data);
+    } catch(e) {
+        console.log('Error fetching Person Movies: ', e)
+    }
+  };
 
   useEffect(() => {
     setLoading(true);
     getPerson(item.id);
     getPersonMovies(item.id);
+    getPersonTvShows(item.id);
     //console.log('Person: ', item);
   }, [item]);
 
@@ -143,7 +154,8 @@ export default function PersonScreen() {
             </Text>
           </View>
           {/* movieList */}
-          <MovieList title={"Movies"} hideSeeAll={true} data={personMovies} media={'movie'}/> 
+          <MovieList title={"Movies of " + person?.name} hideSeeAll={true} data={personMovies} media={'movie'}/> 
+          <MovieList title={"TV Shows of " + person?.name } hideSeeAll={true} data={personTvShows} media={'tv'}/> 
         </View>
       )}
       {/* person deets */}
