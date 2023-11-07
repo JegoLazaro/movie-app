@@ -14,6 +14,7 @@ const movieCastEP = (id,media) => `${apiBaseUrl}/${media}/${id}/credits?api_key=
 const similarMoviesEP = (id,media) => `${apiBaseUrl}/${media}/${id}/similar?api_key=${apiKey}`;
 
 const personEP = (id) => `${apiBaseUrl}/person/${id}?api_key=${apiKey}`;
+const personMoviesEP = (id) => `${apiBaseUrl}/person/${id}/movie_credits?api_key=${apiKey}`;
 
 export const image500 = path => path ? `https://image.tmdb.org/t/p/w500/${path}` : null;
 
@@ -69,4 +70,8 @@ export const fetchSimilarMovies = (id,media) => {
 
 export const fetchPerson = (id) => {
     return apiCall(personEP(id));
+}
+
+export const fetchPersonMovies = (id) => {
+    return apiCall(personMoviesEP(id));
 }

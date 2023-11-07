@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { ChevronLeftIcon, HeartIcon } from 'react-native-heroicons/outline'
+import { ChevronLeftIcon, HeartIcon } from 'react-native-heroicons/solid'
 import { HeartIcon as HeartOut } from "react-native-heroicons/outline";
 import { styles,theme } from '../theme'
 import { useNavigation } from '@react-navigation/native';

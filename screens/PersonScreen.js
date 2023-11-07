@@ -16,7 +16,7 @@ import { styles, theme } from "../theme";
 import { useNavigation } from "@react-navigation/native";
 import MovieList from "../components/movieList";
 import Loading from "../components/loading";
-import { fetchPerson, image500, noPicPoster } from "../api/moviedb";
+import { fetchPerson, fetchPersonMovies, image500, noPicActor, noPicPoster } from "../api/moviedb";
 
 var { width, height } = Dimensions.get("window");
 
@@ -24,7 +24,7 @@ export default function PersonScreen() {
   const navigation = useNavigation();
   const [isFave, toggleFave] = useState(false);
   const verticalMargin = Platform.OS == "ios" ? "" : "my-3";
-  const [personMovies, setPersonMovies] = useState([1, 2, 3, 4, 5]);
+  const [personMovies, setPersonMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [person, setPerson] = useState({});
   const { params: item } = useRoute();
@@ -33,18 +33,27 @@ export default function PersonScreen() {
     try {
       const data = await fetchPerson(id);
       if (data) setPerson(data);
-      console.log('PERSON DEETS ==> ', data);
+      //console.log('PERSON DEETS ==> ', data);
       setLoading(false);
     } catch (e) {
       console.log("Error fetching Person Deets: ", e);
     }
-
     setLoading(false);
+  };
+  const getPersonMovies = async (id) => {
+    try {
+        const data = await fetchPersonMovies(id);
+        data && data.cast ? setPersonMovies(data.cast) : "";
+        //console.log('PERSON MOVIES =>>', data);
+    } catch(e) {
+        console.log('Error fetching Person Movies: ', e)
+    }
   };
 
   useEffect(() => {
     setLoading(true);
     getPerson(item.id);
+    getPersonMovies(item.id);
     //console.log('Person: ', item);
   }, [item]);
 
@@ -94,7 +103,7 @@ export default function PersonScreen() {
           >
             <View className="items-center rounded-full overflow-hidden border-2 border-neutral-500">
               <Image
-                source={{ uri: image500(person?.profile_path) }}
+                source={{ uri: image500(person?.profile_path) || noPicActor}}
                 style={{ height: height * 0.43, width: width * 0.75 }}
               />
             </View>
@@ -124,17 +133,17 @@ export default function PersonScreen() {
             </View>
             <View className="px-2 items-center">
               <Text className="text-white font-semibold">Popularity</Text>
-              <Text className="text-neutral-300 text-sm">{ person?.popularity.toFixed(2) }</Text>
+              <Text className="text-neutral-300 text-sm">{ person?.popularity?.toFixed(2) }%</Text>
             </View>
           </View>
           <View className="my-6 mx-4 space-y-2">
             <Text className="text-white text-lg">Biography</Text>
             <Text className="text-neutral-400 tracking-wide">
-              { person?.biography }
+              { person?.biography  || 'No Biography Available'}
             </Text>
           </View>
           {/* movieList */}
-          {/* <MovieList title={"Movies"} hideSeeAll={true} data={personMovies}/> */}
+          <MovieList title={"Movies"} hideSeeAll={true} data={personMovies} media={'movie'}/> 
         </View>
       )}
       {/* person deets */}
