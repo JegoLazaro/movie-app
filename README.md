@@ -19,7 +19,7 @@ Make sure you have the following installed:
 1. Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/your-username/react-native-movie-app.git
+git clone https://github.com/jegolazaro/react-native-movie-app.git
 
 ```
 ## Navigate to the project directory:
