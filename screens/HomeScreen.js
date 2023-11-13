@@ -36,6 +36,7 @@ function HomeScreen() {
     try {
       const data = await fetchUpcomingMovies();
       data && data.results? setUpcoming(data.results) : "";
+      console.log('MOVIE DEETS: ', data);
       
     }catch (e) {
       console.log('Error in getting Upcoming Movies',e);

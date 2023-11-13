@@ -29,6 +29,7 @@ export default function MovieScreen() {
   const getMovieDeets = async (id) => {
     try {
         const data = await fetchMovieDeets(id, media);
+        
         if (data) setMovie(data);
         setLoading(false);
     } catch (e) {

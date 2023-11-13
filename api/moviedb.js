@@ -7,6 +7,7 @@ import { apiKey, apiBaseUrl } from "../constants";
 const trendingMoviesEP = `${apiBaseUrl}/trending/movie/day?api_key=${apiKey}`;
 const upcomingMoviesEP = `${apiBaseUrl}/movie/upcoming?api_key=${apiKey}`; 
 const topRatedMoviesEP = `${apiBaseUrl}/movie/top_rated?api_key=${apiKey}`;
+const searchMovieEP = `${apiBaseUrl}/search/movie?api_key=${apiKey}`;
 
 // dynamic EPs
 const movieDeetsEP = (id,media) => `${apiBaseUrl}/${media}/${id}?api_key=${apiKey}`;
@@ -79,4 +80,8 @@ export const fetchPersonMovies = (id) => {
 
 export const fetchPersonTvShows = (id) => {
     return apiCall(personTvShowsEP(id));
+}
+
+export const searchMovies = (params) => {
+    return apiCall(searchMovieEP, params);
 }
