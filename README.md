@@ -24,7 +24,7 @@ git clone https://github.com/jegolazaro/react-native-movie-app.git
 ```
 ## Navigate to the project directory:
 
-`cd react-native-movie-app`
+`cd movie-app`
 
 ## Install dependencies using terminal
 `npm i` 
@@ -37,3 +37,12 @@ git clone https://github.com/jegolazaro/react-native-movie-app.git
 2. Scan the QR code displayed in the terminal or Expo DevTools using the Expo Go app.
 
 3. The app should now be running on your device/emulator.
+
+### Acknowledgements
+This project is made with the guide from the tutorial of Code with Nomi Youtube
+
+### Different Features from Tutorial
+- Used Trending TV shows API
+- Configured the Code to accommodate the use of both TVs and Movies API
+- Implemented Different UI for the search screen
+- Implemented TV shows list for casts
